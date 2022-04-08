@@ -1,0 +1,73 @@
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Clearing any previously set forwarded ports...
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+    default: Adapter 2: intnet
+    default: Adapter 3: intnet
+    default: Adapter 4: bridged
+==> default: Forwarding ports...
+    default: 5001 (guest) => 5001 (host) (adapter 1)
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+==> default: Configuring and enabling network interfaces...
+==> default: Mounting shared folders...
+    default: /vagrant => C:/Users/Mario.Doman/Desktop/MY_PROJECTS/VPP_VAGRANT_ROBOT_AUTOMATION
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+==> default: Running provisioner: shell...
+    default: Running: inline script
+==> default: Running provisioner: shell...
+    default: Running: inline script
+    default: deb [trusted=yes] https://packagecloud.io/fdio/release/ubuntu bionic main
+    default:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    default:                                  Dload  Upload   Total   Spent    Left  Speed
+    default:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: apt-key output should not be parsed (stdout is not a terminal)
+    default:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    default:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  3937  100  3937    0     0   4242      0 --:--:-- --:--:-- --:--:-- 3844k
+    default: OK
+    default: Hit:1 http://archive.ubuntu.com/ubuntu bionic InRelease
+    default: Get:2 http://archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
+    default: Get:3 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
+    default: Get:4 http://archive.ubuntu.com/ubuntu bionic-backports InRelease [74.6 kB]
+    default: Hit:5 https://packagecloud.io/fdio/release/ubuntu bionic InRelease
+    default: Fetched 252 kB in 1s (234 kB/s)
+    default: Reading package lists...
+    default: Reading package lists...
+    default: Building dependency tree...
+    default: Reading state information...
+    default: iperf is already the newest version (2.0.10+dfsg1-1ubuntu0.18.04.2).
+    default: vpp is already the newest version (21.10.1-release).
+    default: vpp-plugin-core is already the newest version (21.10.1-release).
+    default: vpp-plugin-dpdk is already the newest version (21.10.1-release).
+    default: 0 upgraded, 0 newly installed, 0 to remove and 75 not upgraded.
+    default: unknown input `exit'
+    default: PING 172.168.1.6 (172.168.1.6) 56(84) bytes of data.
+    default: From 172.168.1.5 icmp_seq=1 Destination Host Unreachable
+    default: From 172.168.1.5 icmp_seq=2 Destination Host Unreachable
+    default: From 172.168.1.5 icmp_seq=3 Destination Host Unreachable
+    default: 64 bytes from 172.168.1.6: icmp_seq=4 ttl=64 time=1023 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=5 ttl=64 time=0.419 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=6 ttl=64 time=0.198 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=7 ttl=64 time=0.292 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=8 ttl=64 time=0.231 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=9 ttl=64 time=0.172 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=10 ttl=64 time=0.288 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=11 ttl=64 time=0.270 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=12 ttl=64 time=0.272 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=13 ttl=64 time=0.284 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=14 ttl=64 time=0.290 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=15 ttl=64 time=0.313 ms
+    default: 
+    default: --- 172.168.1.6 ping statistics ---
+    default: 15 packets transmitted, 12 received, +3 errors, 20% packet loss, time 14327ms
+    default: rtt min/avg/max/mdev = 0.172/85.580/1023.937/282.925 ms, pipe 4
+    default: Running Iperf Server as a daemon
+    default: The Iperf daemon process ID : 2293
