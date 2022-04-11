@@ -1,18 +1,28 @@
 *** Settings ***
-Library    Process     
+Library    Process    
+Library    OperatingSystem
+Library    String
+
 
 *** Test Cases *** 
 Start Vagrant VM and check reply from from 172.168.1.6
     ${result} =  Run Process    vagrant    up  shell=True  stdout=vm_start_log.txt
     Should Contain  ${result.stdout}    64 bytes from
 
+
+Read Text File to find IP from DHCP
+    ${File}=    Get File  vm_start_log.txt
+    @{list}=    Split to lines  ${File}    
+    ${DHCP_IP}=  Set Variable  ${list[-1][25:37]}
+    Set Global Variable      ${DHCP_IP} 
+
 Ping test from host to bridged adapter
-    ${result} =     Run Process    ping ubuntu2  shell=True  stdout=stdout.txt
+    ${result} =     Run Process    ping ${DHCP_IP}  shell=True  stdout=stdout.txt
     Log     all output: ${result.stdout}
-    Should Contain  ${result.stdout}    Reply from
+    Should Contain  ${result.stdout}    Reply from  ${DHCP_IP}
 
 IPERF test from host to bridged adapter
-    ${result} =    Run Process    /iperf/iperf.exe    -c    ubuntu2  shell=True  stdout=iperf_stdout.txt
+    ${result} =    Run Process    /iperf/iperf.exe -c ${DHCP_IP}  shell=True  stdout=iperf_stdout.txt
     Log     all output: ${result.stdout}
     Should Contain  ${result.stdout}    connected with
 

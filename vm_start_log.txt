@@ -27,14 +27,15 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
     default:                                  Dload  Upload   Total   Spent    Left  Speed
     default:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0Warning: apt-key output should not be parsed (stdout is not a terminal)
-    default:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-    default: 100  3937  100  3937    0     0   4546      0 --:--:-- --:--:-- --:--:--  4546
+    default:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    default:   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  3937  100  3937    0     0   4801      0 --:--:-- --:--:-- --:--:--  113k
     default: OK
     default: Hit:1 http://archive.ubuntu.com/ubuntu bionic InRelease
-    default: Hit:2 http://security.ubuntu.com/ubuntu bionic-security InRelease
-    default: Hit:3 http://archive.ubuntu.com/ubuntu bionic-updates InRelease
-    default: Hit:4 http://archive.ubuntu.com/ubuntu bionic-backports InRelease
+    default: Get:2 http://security.ubuntu.com/ubuntu bionic-security InRelease [88.7 kB]
+    default: Get:3 http://archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
+    default: Get:4 http://archive.ubuntu.com/ubuntu bionic-backports InRelease [74.6 kB]
     default: Hit:5 https://packagecloud.io/fdio/release/ubuntu bionic InRelease
+    default: Fetched 252 kB in 1s (235 kB/s)
     default: Reading package lists...
     default: Reading package lists...
     default: Building dependency tree...
@@ -49,21 +50,22 @@ Bringing machine 'default' up with 'virtualbox' provider...
     default: From 172.168.1.5 icmp_seq=1 Destination Host Unreachable
     default: From 172.168.1.5 icmp_seq=2 Destination Host Unreachable
     default: From 172.168.1.5 icmp_seq=3 Destination Host Unreachable
-    default: 64 bytes from 172.168.1.6: icmp_seq=4 ttl=64 time=1024 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=5 ttl=64 time=0.640 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=6 ttl=64 time=0.340 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=7 ttl=64 time=1.04 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=8 ttl=64 time=0.326 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=9 ttl=64 time=0.283 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=10 ttl=64 time=0.221 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=11 ttl=64 time=0.205 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=12 ttl=64 time=0.265 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=13 ttl=64 time=0.347 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=14 ttl=64 time=0.622 ms
-    default: 64 bytes from 172.168.1.6: icmp_seq=15 ttl=64 time=0.326 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=4 ttl=64 time=1025 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=5 ttl=64 time=0.591 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=6 ttl=64 time=0.285 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=7 ttl=64 time=0.302 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=8 ttl=64 time=0.397 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=9 ttl=64 time=0.302 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=10 ttl=64 time=0.359 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=11 ttl=64 time=0.300 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=12 ttl=64 time=0.332 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=13 ttl=64 time=0.373 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=14 ttl=64 time=0.318 ms
+    default: 64 bytes from 172.168.1.6: icmp_seq=15 ttl=64 time=0.360 ms
     default: 
     default: --- 172.168.1.6 ping statistics ---
-    default: 15 packets transmitted, 12 received, +3 errors, 20% packet loss, time 14308ms
-    default: rtt min/avg/max/mdev = 0.205/85.765/1024.568/283.059 ms, pipe 4
+    default: 15 packets transmitted, 12 received, +3 errors, 20% packet loss, time 14329ms
+    default: rtt min/avg/max/mdev = 0.285/85.780/1025.451/283.321 ms, pipe 4
     default: Running Iperf Server as a daemon
-    default: The Iperf daemon process ID : 2222
+    default: The Iperf daemon process ID : 2195
+    default:         inet 172.16.4.73  netmask 255.255.255.0  broadcast 172.16.4.255

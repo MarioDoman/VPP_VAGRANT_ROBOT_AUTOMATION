@@ -1,136 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1.3 (Python 3.10.4 on win32)" generated="20220408 15:13:33.509" rpa="false" schemaversion="2">
+<robot generator="Robot 4.1.3 (Python 3.10.4 on win32)" generated="20220411 10:08:41.487" rpa="false" schemaversion="2">
 <suite id="s1" name="Start" source="C:\Users\Mario.Doman\Desktop\MY_PROJECTS\VPP_VAGRANT_ROBOT_AUTOMATION\start.robot">
-<test id="s1-t1" name="Start Vagrant VM and check reply from from 172.168.1.6">
-<kw name="Run Process" library="Process">
-<var>${result}</var>
-<arg>vagrant</arg>
-<arg>up</arg>
-<arg>shell=True</arg>
-<arg>stdout=vm_start_log.txt</arg>
-<doc>Runs a process and waits for it to complete.</doc>
-<msg timestamp="20220408 15:13:33.529" level="INFO">Starting process:
-vagrant up</msg>
-<msg timestamp="20220408 15:13:33.532" level="INFO">Waiting for process to complete.</msg>
-<msg timestamp="20220408 15:14:32.767" level="INFO">Process completed.</msg>
-<msg timestamp="20220408 15:14:32.768" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
-<status status="PASS" starttime="20220408 15:13:33.528" endtime="20220408 15:14:32.768"/>
+<test id="s1-t1" name="Read Text File to find IP from DHCP">
+<kw name="Get File" library="OperatingSystem">
+<var>${File}</var>
+<arg>vm_start_log.txt</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20220411 10:08:41.514" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\Mario.Doman\Desktop\MY_PROJECTS\VPP_VAGRANT_ROBOT_AUTOMATION\vm_start_log.txt"&gt;C:\Users\Mario.Doman\Desktop\MY_PROJECTS\VPP_VAGRANT_ROBOT_AUTOMATION\vm_start_log.txt&lt;/a&gt;'.</msg>
+<msg timestamp="20220411 10:08:41.514" level="INFO">${File} = Bringing machine 'default' up with 'virtualbox' provider...
+==&gt; default: Clearing any previously set forwarded ports...
+==&gt; default: Clearing any previously set network interfaces...
+==&gt; default: Prep...</msg>
+<status status="PASS" starttime="20220411 10:08:41.514" endtime="20220411 10:08:41.514"/>
 </kw>
-<kw name="Should Contain" library="BuiltIn">
-<arg>${result.stdout}</arg>
-<arg>64 bytes from 172.168.1.6:</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20220408 15:14:32.768" endtime="20220408 15:14:32.773"/>
+<kw name="Split To Lines" library="String">
+<var>@{list}</var>
+<arg>${File}</arg>
+<doc>Splits the given string to lines.</doc>
+<msg timestamp="20220411 10:08:41.515" level="INFO">75 lines returned</msg>
+<msg timestamp="20220411 10:08:41.515" level="INFO">@{list} = [ Bringing machine 'default' up with 'virtualbox' provider... | ==&gt; default: Clearing any previously set forwarded ports... | ==&gt; default: Clearing any previously set network interfaces... | ==&gt; defau...</msg>
+<status status="PASS" starttime="20220411 10:08:41.515" endtime="20220411 10:08:41.515"/>
 </kw>
-<status status="PASS" starttime="20220408 15:13:33.528" endtime="20220408 15:14:32.773"/>
+<kw name="Set Variable" library="BuiltIn">
+<var>${DHCP_IP}</var>
+<arg>${list[-1][25:37]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220411 10:08:41.515" level="INFO">${DHCP_IP} =  172.16.4.73</msg>
+<status status="PASS" starttime="20220411 10:08:41.515" endtime="20220411 10:08:41.515"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${DHCP_IP}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220411 10:08:41.516" level="INFO">${DHCP_IP} =  172.16.4.73</msg>
+<status status="PASS" starttime="20220411 10:08:41.516" endtime="20220411 10:08:41.516"/>
+</kw>
+<status status="PASS" starttime="20220411 10:08:41.514" endtime="20220411 10:08:41.516"/>
 </test>
 <test id="s1-t2" name="Ping test from host to bridged adapter">
 <kw name="Run Process" library="Process">
 <var>${result}</var>
-<arg>ping 192.168.1.17</arg>
+<arg>ping ${DHCP_IP}</arg>
 <arg>shell=True</arg>
 <arg>stdout=stdout.txt</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<msg timestamp="20220408 15:14:32.775" level="INFO">Starting process:
-ping 192.168.1.17</msg>
-<msg timestamp="20220408 15:14:32.779" level="INFO">Waiting for process to complete.</msg>
-<msg timestamp="20220408 15:14:35.795" level="INFO">Process completed.</msg>
-<msg timestamp="20220408 15:14:35.795" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
-<status status="PASS" starttime="20220408 15:14:32.774" endtime="20220408 15:14:35.795"/>
+<msg timestamp="20220411 10:08:41.517" level="INFO">Starting process:
+ping  172.16.4.73</msg>
+<msg timestamp="20220411 10:08:41.521" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20220411 10:08:44.537" level="INFO">Process completed.</msg>
+<msg timestamp="20220411 10:08:44.537" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<status status="PASS" starttime="20220411 10:08:41.517" endtime="20220411 10:08:44.537"/>
 </kw>
 <kw name="Log" library="BuiltIn">
 <arg>all output: ${result.stdout}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20220408 15:14:35.797" level="INFO">all output: 
-Pinging 192.168.1.17 with 32 bytes of data:
-Reply from 192.168.1.17: bytes=32 time&lt;1ms TTL=64
-Reply from 192.168.1.17: bytes=32 time&lt;1ms TTL=64
-Reply from 192.168.1.17: bytes=32 time&lt;1ms TTL=64
-Reply from 192.168.1.17: bytes=32 time&lt;1ms TTL=64
+<msg timestamp="20220411 10:08:44.539" level="INFO">all output: 
+Pinging 172.16.4.73 with 32 bytes of data:
+Reply from 172.16.4.73: bytes=32 time&lt;1ms TTL=64
+Reply from 172.16.4.73: bytes=32 time&lt;1ms TTL=64
+Reply from 172.16.4.73: bytes=32 time&lt;1ms TTL=64
+Reply from 172.16.4.73: bytes=32 time&lt;1ms TTL=64
 
-Ping statistics for 192.168.1.17:
+Ping statistics for 172.16.4.73:
     Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
     Minimum = 0ms, Maximum = 0ms, Average = 0ms</msg>
-<status status="PASS" starttime="20220408 15:14:35.796" endtime="20220408 15:14:35.797"/>
+<status status="PASS" starttime="20220411 10:08:44.538" endtime="20220411 10:08:44.539"/>
 </kw>
 <kw name="Should Contain" library="BuiltIn">
 <arg>${result.stdout}</arg>
-<arg>Reply from 192.168.1.17</arg>
+<arg>Reply from</arg>
+<arg>${DHCP_IP}</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20220408 15:14:35.797" endtime="20220408 15:14:35.797"/>
+<status status="PASS" starttime="20220411 10:08:44.539" endtime="20220411 10:08:44.539"/>
 </kw>
-<status status="PASS" starttime="20220408 15:14:32.774" endtime="20220408 15:14:35.798"/>
+<status status="PASS" starttime="20220411 10:08:41.517" endtime="20220411 10:08:44.539"/>
 </test>
 <test id="s1-t3" name="IPERF test from host to bridged adapter">
 <kw name="Run Process" library="Process">
 <var>${result}</var>
-<arg>/iperf/iperf.exe</arg>
-<arg>-c</arg>
-<arg>192.168.1.17</arg>
+<arg>/iperf/iperf.exe -c ${DHCP_IP}</arg>
 <arg>shell=True</arg>
 <arg>stdout=iperf_stdout.txt</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<msg timestamp="20220408 15:14:35.799" level="INFO">Starting process:
-/iperf/iperf.exe -c 192.168.1.17</msg>
-<msg timestamp="20220408 15:14:35.801" level="INFO">Waiting for process to complete.</msg>
-<msg timestamp="20220408 15:14:46.208" level="INFO">Process completed.</msg>
-<msg timestamp="20220408 15:14:46.208" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
-<status status="PASS" starttime="20220408 15:14:35.798" endtime="20220408 15:14:46.208"/>
+<msg timestamp="20220411 10:08:44.541" level="INFO">Starting process:
+/iperf/iperf.exe -c  172.16.4.73</msg>
+<msg timestamp="20220411 10:08:44.543" level="INFO">Waiting for process to complete.</msg>
+<msg timestamp="20220411 10:08:54.608" level="INFO">Process completed.</msg>
+<msg timestamp="20220411 10:08:54.609" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<status status="PASS" starttime="20220411 10:08:44.540" endtime="20220411 10:08:54.609"/>
 </kw>
 <kw name="Log" library="BuiltIn">
 <arg>all output: ${result.stdout}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20220408 15:14:46.213" level="INFO">all output: ------------------------------------------------------------
-Client connecting to 192.168.1.17, TCP port 5001
+<msg timestamp="20220411 10:08:54.613" level="INFO">all output: ------------------------------------------------------------
+Client connecting to 172.16.4.73, TCP port 5001
 TCP window size: 63.0 KByte (default)
 ------------------------------------------------------------
-[  3] local 192.168.1.249 port 49349 connected with 192.168.1.17 port 5001
+[  3] local 172.16.4.85 port 62531 connected with 172.16.4.73 port 5001
 [ ID] Interval       Transfer     Bandwidth
-[  3]  0.0-10.0 sec  4.13 GBytes  3.54 Gbits/sec</msg>
-<status status="PASS" starttime="20220408 15:14:46.209" endtime="20220408 15:14:46.213"/>
+[  3]  0.0-10.0 sec  4.27 GBytes  3.67 Gbits/sec</msg>
+<status status="PASS" starttime="20220411 10:08:54.609" endtime="20220411 10:08:54.613"/>
 </kw>
 <kw name="Should Contain" library="BuiltIn">
 <arg>${result.stdout}</arg>
-<arg>connected with 192.168.1.17 port 5001</arg>
+<arg>connected with</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20220408 15:14:46.213" endtime="20220408 15:14:46.214"/>
+<status status="PASS" starttime="20220411 10:08:54.614" endtime="20220411 10:08:54.614"/>
 </kw>
-<status status="PASS" starttime="20220408 15:14:35.798" endtime="20220408 15:14:46.214"/>
+<status status="PASS" starttime="20220411 10:08:44.540" endtime="20220411 10:08:54.614"/>
 </test>
-<test id="s1-t4" name="Stop Vagrant VM and check shutdown message">
-<kw name="Run Process" library="Process">
-<var>${result}</var>
-<arg>vagrant</arg>
-<arg>halt</arg>
-<arg>shell=True</arg>
-<arg>stdout=vm_shutdown_log.txt</arg>
-<doc>Runs a process and waits for it to complete.</doc>
-<msg timestamp="20220408 15:14:46.215" level="INFO">Starting process:
-vagrant halt</msg>
-<msg timestamp="20220408 15:14:46.217" level="INFO">Waiting for process to complete.</msg>
-<msg timestamp="20220408 15:14:54.485" level="INFO">Process completed.</msg>
-<msg timestamp="20220408 15:14:54.485" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
-<status status="PASS" starttime="20220408 15:14:46.215" endtime="20220408 15:14:54.486"/>
-</kw>
-<kw name="Should Contain" library="BuiltIn">
-<arg>${result.stdout}</arg>
-<arg>Attempting graceful shutdown of VM</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20220408 15:14:54.486" endtime="20220408 15:14:54.487"/>
-</kw>
-<status status="PASS" starttime="20220408 15:14:46.214" endtime="20220408 15:14:54.487"/>
-</test>
-<status status="PASS" starttime="20220408 15:13:33.510" endtime="20220408 15:14:54.488"/>
+<status status="PASS" starttime="20220411 10:08:41.488" endtime="20220411 10:08:54.615"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0" skip="0">All Tests</stat>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="4" fail="0" skip="0" id="s1" name="Start">Start</stat>
+<stat pass="3" fail="0" skip="0" id="s1" name="Start">Start</stat>
 </suite>
 </statistics>
 <errors>

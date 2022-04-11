@@ -12,15 +12,8 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_agent = true
   config.vm.network "private_network", ip: "1.1.1.10", virtualbox__intnet: true
   config.vm.network "private_network", ip: "1.1.1.11", virtualbox__intnet: true
-  config.vm.network "public_network", ip: "192.168.1.17", bridge: "Realtek USB GbE Family Controller #3"
-  # config.vm.network "forwarded_port", guest: 5001, host: 5001
-
-  
-
-  # # default router
-  # config.vm.provision "shell",
-  #   run: "always",
-  #   inline: "route add default gw 192.168.1.1"
+  # config.vm.network "public_network", ip: "192.168.1.17", bridge: "Realtek USB GbE Family Controller #3"
+  config.vm.network "public_network", type: "dhcp"
 
  
   config.vm.provider "virtualbox" do |vb|
@@ -48,5 +41,6 @@ Vagrant.configure(2) do |config|
     sudo vppctl set interface state GigabitEthernet0/9/0 up    
     ping -c 15 172.168.1.6
     iperf -D -s
+    ifconfig eth3 | grep "inet "
     )
 end
