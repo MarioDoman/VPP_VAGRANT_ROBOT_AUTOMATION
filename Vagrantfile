@@ -13,14 +13,14 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "1.1.1.10", virtualbox__intnet: true
   config.vm.network "private_network", ip: "1.1.1.11", virtualbox__intnet: true
   config.vm.network "public_network", ip: "192.168.1.17", bridge: "Realtek USB GbE Family Controller #3"
-  config.vm.network "forwarded_port", guest: 5001, host: 5001
+  # config.vm.network "forwarded_port", guest: 5001, host: 5001
 
   
 
-  # default router
-  config.vm.provision "shell",
-    run: "always",
-    inline: "route add default gw 192.168.1.1"
+  # # default router
+  # config.vm.provision "shell",
+  #   run: "always",
+  #   inline: "route add default gw 192.168.1.1"
 
  
   config.vm.provider "virtualbox" do |vb|
